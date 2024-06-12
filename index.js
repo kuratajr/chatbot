@@ -2,7 +2,8 @@ var logger = require("morgan");
 var http = require("http");
 var bodyParser = require("body-parser");
 var express = require("express");
-var app = express();
+const app = express();
+const PORT = 3000
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -11,7 +12,7 @@ app.use(
     extended: false,
   })
 );
-var server = http.createServer(app);
+// var server = http.createServer(app);
 var request = require("request");
 
 app.get("/", (req, res) => {
@@ -84,6 +85,6 @@ function sendMessage(senderId, message) {
   });
 }
 
-server.listen(process.env.PORT || 3000, function () {
-  console.log("Chat bot server is listening");
-});
+app.listen(PORT, () => {
+    console.log(`API listening on PORT ${PORT} `)
+  })
